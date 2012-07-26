@@ -99,6 +99,11 @@ def apply_script(protocol, connection, config):
             grenade_packet.velocity = (0.0, 0.0, 0.0)
             self.protocol.send_contained(grenade_packet)
         
+        def on_line_build_attempt(self, points):
+            if self.mode == ZOMBIE:
+                return False
+            return connection,on_line_build_attempt(points)
+        
         def on_block_build_attempt(self, x, y, z):
             if self.mode == ZOMBIE:
                 return False
@@ -196,7 +201,6 @@ def apply_script(protocol, connection, config):
             weapon_reload.player_id = self.player_id
             weapon_reload.clip_ammo = 0
             weapon_reload.reserve_ammo = 0
-            self.grenades = 0
             self.weapon_object.clip_ammo = 0
             self.weapon_object.reserve_ammo = 0
             self.send_contained(weapon_reload)
